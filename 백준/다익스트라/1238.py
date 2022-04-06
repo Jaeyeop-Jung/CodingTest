@@ -27,9 +27,9 @@ def dijkstra(start):
 
 dijkstra(x)
 res_go = distance
-for i in range(n):
+for i in range(1, n + 1):
     distance = [INF] * (n + 1)
-    dijkstra(i + 1)
-    res_go[i+1] += distance[x]
+    dijkstra(i)
+    res_go[i] += distance[x]
 
 print(max(res_go[1:]))
