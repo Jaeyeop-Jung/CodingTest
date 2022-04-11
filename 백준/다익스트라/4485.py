@@ -16,7 +16,6 @@ while True:
         graph.append(list(map(int, input().split())))
 
     def dijkstra():
-        cnt = 1
         heap = []
         distance = []
         for i in range(n):
@@ -30,7 +29,7 @@ while True:
 
             if distance[row][column] < dist:
                 continue
-            cnt += 1
+
             for i in range(4):
                 movedRow, movedColumn = row + dRow[i], column + dColumn[i]
                 if movedRow < 0 or n <= movedRow or movedColumn < 0 or n <= movedColumn:
