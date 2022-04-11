@@ -16,6 +16,7 @@ while True:
         graph.append(list(map(int, input().split())))
 
     def dijkstra():
+        cnt = 1
         heap = []
         distance = []
         for i in range(n):
@@ -23,15 +24,13 @@ while True:
         dRow = [0, 0, 1, -1]
         dColumn = [1, -1, 0, 0]
 
-        heapq.heappush(heap, [0, 0])
-        distance[0][0] = graph[0][0]
+        heapq.heappush(heap, [graph[0][0], 0, 0])
         while heap:
-            row, column = heapq.heappop(heap)
-            dist = distance[row][column]
+            dist, row, column = heapq.heappop(heap)
 
             if distance[row][column] < dist:
                 continue
-
+            cnt += 1
             for i in range(4):
                 movedRow, movedColumn = row + dRow[i], column + dColumn[i]
                 if movedRow < 0 or n <= movedRow or movedColumn < 0 or n <= movedColumn:
@@ -40,7 +39,7 @@ while True:
                 cost = dist + graph[movedRow][movedColumn]
                 if cost < distance[movedRow][movedColumn]:
                     distance[movedRow][movedColumn] = cost
-                    heapq.heappush(heap, [movedRow, movedColumn])
+                    heapq.heappush(heap, [cost, movedRow, movedColumn])
 
         return distance
 
