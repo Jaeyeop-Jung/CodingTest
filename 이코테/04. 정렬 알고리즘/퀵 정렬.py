@@ -2,12 +2,7 @@ import sys
 
 sys.setrecursionlimit(10000)
 
-# data = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
-
-n = int(input())
-data = []
-for i in range(n):
-    data.append(int(input()))
+data = [7, 5, 9, 0, 3, 1, 6, 2, 4, 8]
 
 # def quick(pivot, start, end):
 #     if end - start <= 1:
@@ -40,29 +35,39 @@ for i in range(n):
 #     quick(localStart, localStart + 1, end)
 # quick(0, 1, len(data) - 1)
 
-def quick(data, start, end):
-    if start >= end:
-        return
-    pivot = start
-    left = start + 1
-    right = end
-    while left <= right:
+# def quick(data, start, end):
+#     if start >= end:
+#         return
+#     pivot = start
+#     left = start + 1
+#     right = end
+#     while left <= right:
+#
+#         while left <= end and data[left] <= data[pivot]:
+#             left += 1
+#
+#         while right > start and data[pivot] < data[right]:
+#             right -= 1
+#
+#         if left >= right:
+#             data[right], data[pivot] = data[pivot], data[right]
+#         else:
+#             data[left], data[right] = data[right], data[left]
+#
+#     quick(data, start, right - 1)
+#     quick(data, right + 1, end)
+#
+# quick(data, 0, len(data) - 1)
 
-        while left <= end and data[left] <= data[pivot]:
-            left += 1
+def quick(array):
+    if len(array) <= 1:
+        return array
+    pivot = array[0]
+    tail = array[1:]
 
-        while right > start and data[pivot] < data[right]:
-            right -= 1
+    left_side = [x for x in tail if x <= pivot]
+    right_side = [x for x in tail if x > pivot]
 
-        if left >= right:
-            data[right], data[pivot] = data[pivot], data[right]
-        else:
-            data[left], data[right] = data[right], data[left]
+    return quick(left_side) + [pivot] + quick(right_side)
 
-    quick(data, start, right - 1)
-    quick(data, right + 1, end)
-
-quick(data, 0, len(data) - 1)
-
-for i in data:
-    print(i)
+print(quick(data))
