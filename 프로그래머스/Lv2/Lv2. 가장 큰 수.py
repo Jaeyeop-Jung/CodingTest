@@ -1,4 +1,4 @@
-# 틀림
+# TODO 틀림
 
 def solution(numbers):
     temp = [[str(numbers[i]), i] for i in range(len(numbers))]
