@@ -1,4 +1,4 @@
-# TODO 틀림
+# TODO 틀림(다른 날에 바로 맞았음. 나중에는 한번에 맞추자)
 
 import sys
 sys.setrecursionlimit(10 ** 7)
@@ -7,7 +7,8 @@ def find_parent(parent, x):
     if x not in parent:
         return x
     else:
-        return find_parent(parent, parent[x])
+        parent[x] = find_parent(parent, parent[x])
+        return parent[x]
 
 
 def solution(k, room_number):
