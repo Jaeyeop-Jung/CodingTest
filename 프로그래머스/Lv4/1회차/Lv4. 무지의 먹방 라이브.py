@@ -1,4 +1,5 @@
-#
+# TODO 틀림
+
 # def solution(food_times, k):
 #     rotate = k // len(food_times)
 #     rest = k % len(food_times)
