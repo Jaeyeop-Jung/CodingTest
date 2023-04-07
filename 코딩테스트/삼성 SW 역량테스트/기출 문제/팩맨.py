@@ -59,26 +59,24 @@ def monsterMove():
                     break
     return newArr
 
-def pacmanMove(arr, visited, r, c, totalEat, totalPath):
+def pacmanMove(arr, r, c, totalEat, totalPath):
     if len(totalPath) == 3:
         global eat, path
-        if path == [] or len(eat) < len(totalEat):
-            eat = totalEat[:]
+        if path == [] or len(eat) < len(set(totalEat)):
+            eat = list(set(totalEat))
             path = totalPath[:]
         return
     for i in range(4):
         movedR, movedC = r + pR[i], c + pC[i]
-        if notInRange(movedR, movedC) or visited[movedR][movedC]:
+        if notInRange(movedR, movedC):
             continue
-        visited[movedR][movedC] = True
         for idx in range(len(arr[movedR][movedC])):
-            totalEat.append([movedR, movedC, idx])
+            totalEat.append((movedR, movedC, idx))
         totalPath.append(i)
-        pacmanMove(arr, visited, movedR, movedC, totalEat, totalPath)
+        pacmanMove(arr, movedR, movedC, totalEat, totalPath)
         totalPath.pop()
         for idx in range(len(arr[movedR][movedC])):
             totalEat.pop()
-        visited[movedR][movedC] = False
 
 def pacmanEat():
     global pacmanR, pacmanC
@@ -115,9 +113,7 @@ for _ in range(t):
     # 3
     eat = []
     path = []
-    visited = [[False] * 4 for _ in range(4)]
-    visited[pacmanR][pacmanC] = True
-    pacmanMove(arr, visited, pacmanR, pacmanC, [], [])
+    pacmanMove(arr, pacmanR, pacmanC, [], [])
     pacmanEat()
 
     # 4
